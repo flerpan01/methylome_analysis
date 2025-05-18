@@ -64,7 +64,9 @@ Each row represents a sample in the column order: generation, sample id and trea
 
 ### Gene annotations
 
-The pipeline expects three gene annotations files (1) CpG-islands positions (`data/cpgislands_GRCm39.bed`), (2) curated reference sequencing database (`data/refseq_UCSC_GRCm39.bed`) and ensembl gene annotations (`data/ensembl-dataset.csv.gz`)
+The pipeline expects three gene annotations files (1) CpG-islands positions (`data/cpgislands_GRCm39.bed`), (2) curated reference sequencing database (`data/refseq_UCSC_GRCm39.bed`) and ensembl gene annotations (`data/ensembl-dataset.csv.gz`).
+
+>These files are included in the repo
 
 ## Parameters
 
@@ -83,7 +85,7 @@ Experimental design:
 + effect (`mean`)
 + multiple testing correction (`BH`, Benjamini-Hochberg, FDR)
 
-## Containers
+## Reproducibility
 
 For reproducibility this pipeline uses two singularity containers, which can be downloaded from the [Cloud Library](https://cloud.sylabs.io/library). The `bulk-rrbs` holds most of the R-packages used in the analysis, while `gene-ontology` holds gene ontology related R-packages
 
@@ -112,3 +114,9 @@ $ Rscript <scriptfile>
 ```
 
 </details>
+
+## Run the pipeline
+
+```sh
+nextflow run main.nf
+```

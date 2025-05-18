@@ -5,30 +5,31 @@ This repository holds a nextflow pipeline for analysing bulk RRBS studies. The e
 <details>
   <summary>Coverage files</summary>
 
-To generate methylation coverage files from sequencing files refer to [nf-core/methylseq pipeline](https://nf-co.re/methylseq/latest/)
+>To generate methylation coverage files from sequencing files refer to [nf-core/methylseq pipeline](https://nf-co.re/methylseq/latest/)
 
 </details>
 
 <details>
   <summary>Reference genome</summary>
 
-This pipeline is per default setup for the [mouse genome (GRCm39)](https://www.ensembl.org/Mus_musculus/)
+>This pipeline is per default setup for the [mouse genome (GRCm39)](https://www.ensembl.org/Mus_musculus/)
 
 </details>
 
 <details>
   <summary>Statistics</summary>
 
-Differentially methylated regions are identified with the R-package [`methylKit`](https://bioconductor.org/packages/release/bioc/html/methylKit.html), using logistic regression test and with overdispertion correction and calulating the generic mean methylation between groups. `FDR < 0.01` was used for multiple testing correction (Benjamini-Hochberg qvalue).
+>Differentially methylated regions are identified with the R-package [`methylKit`](https://bioconductor.org/packages/release/bioc/html/methylKit.html), using logistic regression test and with overdispertion correction and calulating the generic mean methylation between groups. `FDR < 0.01` was used for multiple testing correction (Benjamini-Hochberg qvalue).
 
 </details> 
 
 <details>
   <summary>Gene ontology analysis</summary>
 
-To investigate if any biological functions, processes or pathways are enriched (over-represented) the _Over Representation Analysis (ORA)_ [Boyle et al., 2004](https://doi.org/10.1093/bioinformatics/bth456) method is used. ORA uses hypergeometric distribution and compares the differentially methylated genes with all genes in the dataset. The _p_-values are adjusted to _q_-values for multiple corretion (significance threshold `qvalue < 0.2`).
 
-Enrichment is analysed in three databases; (1) Gene Ontology (**GO**), (2) Kyoto Encyclopedia of Genes and Genomes (**KEGG**), and **Reactome** pathways. GO and KEGG enrichment are tested with the R-package [`clusterProfiler`](https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html), [Yu et al., 2012](https://doi.org/10.1089/omi.2011.0118), [Wu et al., 2021](https://doi.org/10.1016/j.xinn.2021.100141). The reactome pathways are tested with the R-package [`ReactomePA`](https://bioconductor.org/packages/release/bioc/html/ReactomePA.html), [Yu et al., 2016](https://doi.org/10.1039/C5MB00663E). 
+>To investigate if any biological functions, processes or pathways are enriched (over-represented) the _Over Representation Analysis (ORA)_ [Boyle et al., 2004](https://doi.org/10.1093/bioinformatics/bth456) method is used. ORA uses hypergeometric distribution and compares the differentially methylated genes with all genes in the dataset. The _p_-values are adjusted to _q_-values for multiple corretion (significance threshold `qvalue < 0.2`).
+
+>Enrichment is analysed in three databases; (1) Gene Ontology (**GO**), (2) Kyoto Encyclopedia of Genes and Genomes (**KEGG**), and **Reactome** pathways. GO and KEGG enrichment are tested with the R-package [`clusterProfiler`](https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html), [Yu et al., 2012](https://doi.org/10.1089/omi.2011.0118), [Wu et al., 2021](https://doi.org/10.1016/j.xinn.2021.100141). The reactome pathways are tested with the R-package [`ReactomePA`](https://bioconductor.org/packages/release/bioc/html/ReactomePA.html), [Yu et al., 2016](https://doi.org/10.1039/C5MB00663E). 
 
 </details>
 

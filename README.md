@@ -1,18 +1,16 @@
 # README
 
+[![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
+
 This repository holds a nextflow pipeline for analysing bulk RRBS studies. The experimental design is build on multiple generations (F0, F1, F2, etc) and doses (0, 10, 100, 1000, etc). The pipeline expect coverage files (`sample.cov.gz`) as input generated with Bismark and outputs **(1)** differentially methylated regions, **(2)** differentially methylated genes and **(3)** gene ontology analysis results, all in `Rds` file format containing all generations and doses in a single file, respectively. The pipeline also outputs the tables as `excel` files to be included as supplementary tables in a scientic report.
+
+> [!NOTE]
+> This pipeline is per default setup for the [mouse genome (GRCm39)](https://www.ensembl.org/Mus_musculus/)
 
 <details>
   <summary>Coverage files</summary>
 
 >To generate methylation coverage files from sequencing files refer to [nf-core/methylseq pipeline](https://nf-co.re/methylseq/latest/)
-
-</details>
-
-<details>
-  <summary>Reference genome</summary>
-
->This pipeline is per default setup for the [mouse genome (GRCm39)](https://www.ensembl.org/Mus_musculus/)
 
 </details>
 

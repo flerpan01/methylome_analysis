@@ -10,21 +10,21 @@ This repository holds a nextflow pipeline for analysing bulk RRBS studies. The e
 > This pipeline is per default setup for the [mouse genome (GRCm39)](https://www.ensembl.org/Mus_musculus/)
 
 <details>
-  <summary>_Coverage files_</summary>
+  <summary>Coverage files</summary>
 
 >To generate methylation coverage files from sequencing files refer to [nf-core/methylseq pipeline](https://nf-co.re/methylseq/latest/)
 
 </details>
 
 <details>
-  <summary>_Statistics_</summary>
+  <summary>Statistics</summary>
 
 >Differentially methylated regions are identified with the R-package [`methylKit`](https://bioconductor.org/packages/release/bioc/html/methylKit.html), using logistic regression test and with overdispertion correction and calulating the generic mean methylation between groups. `FDR < 0.01` was used for multiple testing correction (Benjamini-Hochberg qvalue).
 
 </details> 
 
 <details>
-  <summary>_Gene ontology analysis_</summary>
+  <summary>Gene ontology analysis</summary>
 
 
 >To investigate if any biological functions, processes or pathways are enriched (over-represented) the _Over Representation Analysis (ORA)_ [Boyle et al., 2004](https://doi.org/10.1093/bioinformatics/bth456) method is used. ORA uses hypergeometric distribution and compares the differentially methylated genes with all genes in the dataset. The _p_-values are adjusted to _q_-values for multiple corretion (significance threshold `qvalue < 0.2`).

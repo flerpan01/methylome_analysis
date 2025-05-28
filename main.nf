@@ -134,7 +134,7 @@ workflow.onComplete {
 
   sendMail (
     to: "${params.email}",
-    subject: 'RRBS DBP Spleen analysis',
+    subject: 'Methylome analysis',
     body: msg
   )
 }

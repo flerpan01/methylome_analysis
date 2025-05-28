@@ -4,7 +4,7 @@
 
 # README
 
-This repository holds a nextflow pipeline for analysing bulk RRBS studies. The experimental design is build on multiple generations (F0, F1, F2, etc) and doses (0, 10, 100, 1000, etc). The pipeline expect coverage files (`sample.cov.gz`) as input generated with Bismark and outputs tables of (1) **differentially methylated regions**, (2) **differentially methylated genes** and (3) **gene ontology** analysis results. These tables come in `Rds` file format containing all generations and doses in a single file, respectively. The pipeline also outputs the tables as `excel` files to be included as supplementary tables in a scientic report.
+This repository holds a nextflow pipeline for analysing DNA methylation studies. The experimental design is build on multiple generations (F0, F1, F2, etc) and doses (0, 10, 100, 1000, etc). The pipeline expect coverage files (`sample.cov.gz`) as input generated with Bismark and outputs tables of (1) **differentially methylated regions**, (2) **differentially methylated genes** and (3) **gene ontology** analysis results. These tables come in `Rds` file format containing all generations and doses in a single file, respectively. The pipeline also outputs the tables as `excel` files to be included as supplementary tables in a scientic report.
 
 > [!NOTE]
 > This pipeline is per default setup for the [mouse genome (GRCm39)](https://www.ensembl.org/Mus_musculus/)
@@ -17,7 +17,7 @@ This repository holds a nextflow pipeline for analysing bulk RRBS studies. The e
 </details>
 
 <details>
-  <summary>Statistics</summary>
+  <summary>Differential methylation</summary>
 
 >Differentially methylated regions are identified with the R-package [`methylKit`](https://bioconductor.org/packages/release/bioc/html/methylKit.html), using logistic regression test and with overdispertion correction and calulating the generic mean methylation between groups. `FDR < 0.01` was used for multiple testing correction (Benjamini-Hochberg qvalue).
 
@@ -25,7 +25,6 @@ This repository holds a nextflow pipeline for analysing bulk RRBS studies. The e
 
 <details>
   <summary>Gene ontology analysis</summary>
-
 
 >To investigate if any biological functions, processes or pathways are enriched (over-represented) the _Over Representation Analysis (ORA)_ [Boyle et al., 2004](https://doi.org/10.1093/bioinformatics/bth456) method is used. ORA uses hypergeometric distribution and compares the differentially methylated genes with all genes in the dataset. The _p_-values are adjusted to _q_-values for multiple corretion (significance threshold `qvalue < 0.2`).
 

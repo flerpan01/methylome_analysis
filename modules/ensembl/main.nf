@@ -1,5 +1,5 @@
 process ENSEMBL {
-  tag "Ref genome: ${ref_genome}"
+  tag "Ref genome: ${reference_genome}"
   //label
   
   conda "${moduleDir}/environment.yml"
@@ -8,6 +8,9 @@ process ENSEMBL {
   time 1.h
   memory 8.GB
   cpus 1
+
+  input:
+  val reference_genome
 
   output:
   path 'ensembl_dataset.csv.gz', emit: ENSEMBL_DATASET
@@ -19,6 +22,6 @@ process ENSEMBL {
   # set environment variables for biomart cache
   export BIOMART_CACHE="/scratch/.cache"
 
-  ensembl.R ${ref_genome}
+  ensembl.R ${reference_genome}
   """
 }

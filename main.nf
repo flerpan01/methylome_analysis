@@ -1,26 +1,31 @@
 #!/usr/bin/env nextflow
 
+/*
+ *Github: https://github.com/flerpan01/methylome_analysis
+ */
+
 // ~~ Import processes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *
-include { PCA_PLOTS           } from './modules/pca_plots.nf'
-include { BETAVALUES          } from './modules/betavalues.nf'
-include { METHYLKIT           } from './modules/methylKit.nf'
-include { DMR_TABLE           } from './modules/diffmeth_tables.nf'
-include { DMG_TABLE           } from './modules/diffmeth_tables.nf'
-include { GENE_ONTOLOGY       } from './modules/gene_ontology.nf'
-include { SUPPLEMENTARY_EXCEL } from './modules/supplementary.nf'
-include { SUPPLEMENTARY_PLOTS } from './modules/supplementary.nf'
-include { WRAPPER             } from './modules/wrapper.nf'
+include { ENSEMBL             } from './modules/ensembl/main'
+// include { PCA_PLOTS           } from './modules/pca_plots.nf'
+// include { BETAVALUES          } from './modules/betavalues.nf'
+// include { METHYLKIT           } from './modules/methylKit.nf'
+// include { DMR_TABLE           } from './modules/diffmeth_tables.nf'
+// include { DMG_TABLE           } from './modules/diffmeth_tables.nf'
+// include { GENE_ONTOLOGY       } from './modules/gene_ontology.nf'
+// include { SUPPLEMENTARY_EXCEL } from './modules/supplementary.nf'
+// include { SUPPLEMENTARY_PLOTS } from './modules/supplementary.nf'
+// include { WRAPPER             } from './modules/wrapper.nf'
 
 // ~~ Channels ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *
-ch_coverage_files     = Channel.fromPath(params.coveragefiles)
-ch_metadata           = Channel.fromPath(params.metadata)
-ch_ensembl_dataset    = Channel.fromPath(params.ensembl_dataset)
-ch_cpgislands_GRCm39  = Channel.fromPath(params.cpgislands_GRCm39)
-ch_refseq_UCSC_GRCm39 = Channel.fromPath(params.refseq_UCSC_GRCm39)
-generations           = Channel.of( 'F0', 'F1', 'F2' )
-treatments            = Channel.of( '10', '100' )
-DMG_table_output      = Channel.of( 'excel', 'Rds')
-genomic_features      = Channel.of( 'cpg' , 'islands' , 'promoter')
+// ch_coverage_files     = Channel.fromPath(params.coveragefiles)
+// ch_metadata           = Channel.fromPath(params.metadata)
+// ch_ensembl_dataset    = Channel.fromPath(params.ensembl_dataset)
+// ch_cpgislands_GRCm39  = Channel.fromPath(params.cpgislands_GRCm39)
+// ch_refseq_UCSC_GRCm39 = Channel.fromPath(params.refseq_UCSC_GRCm39)
+// generations           = Channel.of( 'F0', 'F1', 'F2' )
+// treatments            = Channel.of( '10', '100' )
+// DMG_table_output      = Channel.of( 'excel', 'Rds')
+// genomic_features      = Channel.of( 'cpg' , 'islands' , 'promoter')
 
 log.info \
   """
@@ -40,7 +45,12 @@ log.info \
 // ~~ Workflow ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *
 
 workflow {
-  
+
+  ENSEMBL( params.reference_genome )
+
+  ch_ensembl_dataset = ENSEMBL.out.ENSEMBL_DATASET
+ 
+/* 
   PCA_PLOTS (
     ch_metadata,
     ch_coverage_files,
@@ -110,6 +120,7 @@ workflow {
     BETAVALUES.out.BETAVALUES.collect(),
     GENE_ONTOLOGY.out.GO_TABLES.collect()
   )
+*/
 }
 
 workflow.onComplete {

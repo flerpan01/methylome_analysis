@@ -6,4 +6,4 @@ dependencies:
   - conda-forge::r-scales=1.4.0
   - conda-forge::r-readr=2.1.5
   - conda-forge::r-gtools=3.9.5
-  - bioconda::r-biomartr=2.65.0
+  - bioconda::bioconductor-biomart=2.65.0

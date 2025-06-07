@@ -48,15 +48,18 @@ workflow {
 
   ENSEMBL( params.reference_genome )
 
-  ch_ensembl_dataset = ENSEMBL.out.ENSEMBL_DATASET
+  ch_ensembl_dataset  = ENSEMBL.out.ENSEMBL_DATASET
 
-  ch_metadata = Channel.fromPath(params.metadata)
+  ch_metadata         = Channel.fromPath(params.metadata)
+  ch_coverage_files   = Channel.fromPath(params.coverage_files)
+  ch_cpgislands       = Channel.fromPath(params.cpgislands_GRCm39)
+  ch_refseq           = Channel.fromPath(params.refseq_UCSC_GRCm39)
 
   METHYLKIT (
     ch_metadata,
-    params.coverage_files,
-    params.cpgislands_GRCm39,
-    params.refseq_UCSC_GRCm39,
+    ch_coverage_files,
+    ch_cpgislands,
+    ch_refseq,
     params.generation,
     params.treatment,
     params.genomic_feature,

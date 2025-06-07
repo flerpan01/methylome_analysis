@@ -1,16 +1,14 @@
-#!/usr/bin/env nextflow
-
 process METHYLKIT {
+  tag "Diff. meth. for ${generation}, ${treatment}, ${genomic_feature}"
+  //label
+  
+  conda "${moduleDir}/environment.yml"
+  container 'library://flerpan01/singularity-r/bulk-rrbs:1.2'
+
   time 2.h
   memory 40.GB
   cpus 4
   
-  tag "${generation} & ${treatment} & ${genomic_feature}"
-
-  //publishDir "${params.outdir}/stub",  mode: 'copy', pattern: "*.Rds"
-
-  container 'library://flerpan01/singularity-r/bulk-rrbs:1.1'
-
   input:
   path metadata
   path coveragefiles

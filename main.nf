@@ -6,9 +6,9 @@
 
 // ~~ Import processes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *
 include { ENSEMBL             } from './modules/ensembl/main'
+include { METHYLKIT           } from './modules/methylKit/main'
 // include { PCA_PLOTS           } from './modules/pca_plots.nf'
 // include { BETAVALUES          } from './modules/betavalues.nf'
-// include { METHYLKIT           } from './modules/methylKit.nf'
 // include { DMR_TABLE           } from './modules/diffmeth_tables.nf'
 // include { DMG_TABLE           } from './modules/diffmeth_tables.nf'
 // include { GENE_ONTOLOGY       } from './modules/gene_ontology.nf'
@@ -49,7 +49,23 @@ workflow {
   ENSEMBL( params.reference_genome )
 
   ch_ensembl_dataset = ENSEMBL.out.ENSEMBL_DATASET
- 
+
+  METHYLKIT (
+    params.metadata,
+    params.coverage_files,
+    ch_cpgislands_GRCm39,
+    ch_refseq_UCSC_GRCm39,
+    generations,
+    treatments,
+    genomic_features,
+    params.diffmeth_test,
+    params.overdisp,
+    params.eff,
+    params.multiple_test_corr
+  )
+
+  ch_diffmeth_files = METHYLKIT.out.collect()
+
 /* 
   PCA_PLOTS (
     ch_metadata,
@@ -67,22 +83,10 @@ workflow {
     genomic_features
   )
 
-  METHYLKIT (
-    ch_metadata,
-    ch_coverage_files,
-    ch_cpgislands_GRCm39,
-    ch_refseq_UCSC_GRCm39,
-    generations,
-    treatments,
-    genomic_features,
-    params.diffmeth_test,
-    params.overdisp,
-    params.eff,
-    params.multiple_test_corr
-  )
+
 
   DMR_TABLE (
-    METHYLKIT.out.collect(),
+    ch_diffmeth_files,
     ch_ensembl_dataset,
     ch_cpgislands_GRCm39,
     ch_refseq_UCSC_GRCm39,

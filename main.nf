@@ -54,15 +54,18 @@ workflow {
   ch_coverage_files   = Channel.fromPath(params.coverage_files)
   ch_cpgislands       = Channel.fromPath(params.cpgislands_GRCm39)
   ch_refseq           = Channel.fromPath(params.refseq_UCSC_GRCm39)
+  ch_generation       = Channel.of(params.generation)
+  ch_treatment        = Channel.of(params.treatment)
+  ch_genomic_feature  = Channel.of(params.genomic_feature)
 
   METHYLKIT (
     ch_metadata,
     ch_coverage_files,
     ch_cpgislands,
     ch_refseq,
-    params.generation,
-    params.treatment,
-    params.genomic_feature,
+    ch_generation,
+    ch_treatment,
+    ch_genomic_feature,
     params.diffmeth_test,
     params.overdisp,
     params.eff,

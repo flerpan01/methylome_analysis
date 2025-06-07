@@ -50,8 +50,10 @@ workflow {
 
   ch_ensembl_dataset = ENSEMBL.out.ENSEMBL_DATASET
 
+  ch_metadata = Channel.fromPath(params.metadata)
+
   METHYLKIT (
-    params.metadata,
+    ch_metadata,
     params.coverage_files,
     params.cpgislands_GRCm39,
     params.refseq_UCSC_GRCm39,

@@ -53,8 +53,8 @@ workflow {
   METHYLKIT (
     params.metadata,
     params.coverage_files,
-    ch_cpgislands_GRCm39,
-    ch_refseq_UCSC_GRCm39,
+    params.cpgislands_GRCm39,
+    params.refseq_UCSC_GRCm39,
     generations,
     treatments,
     genomic_features,

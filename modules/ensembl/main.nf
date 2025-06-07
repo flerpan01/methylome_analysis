@@ -1,5 +1,5 @@
 process ENSEMBL {
-  tag "Ref genome: ${reference_genome}"
+  tag "Building database for ${reference_genome}"
   //label
   
   conda "${moduleDir}/environment.yml"
